@@ -11,7 +11,10 @@ fi
 
 echo "Test, running as root"
 
-# TODO Update and upgrade raspberry
+# Update and upgrade raspberry
+apt update && apt 
+
+
 # TODO Download microphone script
 # TODO Run microphone script
 # TODO install needed programms and dependancies

@@ -2,6 +2,7 @@
 
 # This is the prerequisite script
 # TODO More info
+# TODO jkhdfajklfhdjkslfhjdksla
 
 # ensure user is running as root
 if [ "$EUID" -ne 0 ]

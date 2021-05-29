@@ -69,7 +69,7 @@ def before_request():
 @app.route('/edit_profile', methods=['GET','POST'])
 @login_required
 def edit_profile():
-    form = EditProfileForm()
+    form = EditProfileForm(current_user.username)       # to use validation method add orignial username argument, to prevent duplicats
     if form.validate_on_submit():                       # if validation is true copy the data form into the user object and then write it to the database
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data

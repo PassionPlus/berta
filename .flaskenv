@@ -1,1 +1,2 @@
 FLASK_APP=berta.py
+FLASK_DEBUG=0

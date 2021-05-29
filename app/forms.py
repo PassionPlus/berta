@@ -26,3 +26,10 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()        # searching for the name
             if user is not None:                                                    # if exists raise error
                 raise ValidationError('Please use a different username.')
+
+
+# form in which user can type  a new deepseechlog and test de Plug-In System
+class DeepSpeechLogForm(FlaskForm):
+    deepspeechlog = TextAreaField('Test the Plug-Ins', validators=[
+        DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')

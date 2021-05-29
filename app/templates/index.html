@@ -1,10 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-        <h1>Hi, {{ current_user.username }}!</h1>
-        {% for deepspeechlog in deepspeechlogs %}
-        <div>
-            <p>{{ deepspeechlog.timestamp}} log: <b>{{ deepspeechlog.body }}</b></p>
-        </div>
+<h1>Hi, {{ current_user.username }}!</h1>
+<form action="" method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.deepspeechlog.label }}<br>
+        {{ form.deepspeechlog(cols=32, rows=4) }}<br>
+        {% for error in form.deepspeechlog.errors %}
+        <span style="color: red;">[{{ error }}]</span>
         {% endfor %}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% for deepspeechlog in deepspeechlogs %}
+    {% include 'deepspeechlog.html' %}
+{% endfor %}
 {% endblock %}

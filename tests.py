@@ -33,7 +33,7 @@ class DeepSpeechLogModelCase(unittest.TestCase):
 
     def test_create_deepspeechlog(self):
         now = datetime.utcnow()
-        dsl = DeepSpeechLog(body="first test", timestamp=now + timedelta(seconds=1))
+        dsl = DeepSpeechLog(question="First test!", answer="Yeah, first test!", timestamp=now + timedelta(seconds=1))
         db.session.add(dsl)
         db.session.commit()
 

@@ -5,25 +5,27 @@ from werkzeug.wrappers import request
 from werkzeug.urls import url_parse
 from flask.helpers import url_for
 from flask import render_template, flash, redirect, request
-from app.models import User
-from app.forms import LoginForm, EditProfileForm
+from app.models import User, DeepSpeechLog
+from app.forms import DeepSpeechLogForm, LoginForm, EditProfileForm
 from app import app, db
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required         # decorator, only logged useres can visit the above routes
 def index():
-    deepspeechlogs = [{
-            'timestamp': '25',
-            'body': 'text'
-        },
-        {
-        'timestamp': '24',
-        'body': 'anderere text'
-        }
-    ]
-     
-    return render_template('index.html', title='Home', deepspeechlogs=deepspeechlogs)
+    form = DeepSpeechLogForm()
+    
+    if form.validate_on_submit():
+        deepspeechlog = DeepSpeechLog(question=form.deepspeechlog.data) #i nserts a new Log record into the database
+        #
+        #place for implement answer
+        #
+        db.session.add(deepspeechlog)
+        db.session.commit()
+        flash('Your deepspeechlog is now live!')
+        return redirect(url_for('index'))       # standart practice to response to POST request, for refresh (Post/redirect/Get pattern)
+    deepspeechlogs = DeepSpeechLog.query.order_by(DeepSpeechLog.timestamp.desc()).all()
+    return render_template('index.html', title='Home', form=form, deepspeechlogs=deepspeechlogs)
 
 @app.route('/login', methods=['GET','POST'])
 def login():

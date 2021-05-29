@@ -31,8 +31,9 @@ def load_user(id):
     
 class DeepSpeechLog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
+    question = db.Column(db.String(140))
+    answer = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<DeepSpeechLog {}>'.format(self.body)
+        return '<DeepSpeechLog {}>'.format(self.question)

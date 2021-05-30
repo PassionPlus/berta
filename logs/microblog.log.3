@@ -1,4 +1,36 @@
-2021-05-30 13:25:30,157 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+2021-05-30 13:17:23,117 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 36, in index
+    return render_template('index.html', title='Home', form=form, deepspeechlogs=deepspeechlogs.items, next_url=next_url, prev_url=prev_url)        # items attribute from Pagination class from Flask-SQLAlchemy, contains the list of items retrieved for the selected page
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\base.html", line 40, in template
+    {% block content %}{% endblock %}
+jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
+2021-05-30 13:21:01,896 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:33]
+2021-05-30 13:24:32,929 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:33]
+2021-05-30 13:25:09,282 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:33]
+2021-05-30 13:25:11,536 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
 Traceback (most recent call last):
   File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
     response = self.full_dispatch_request()
@@ -34,49 +66,7 @@ Traceback (most recent call last):
     {% block content -%}
   File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\index.html", line 19, in block 'content'
     {% include 'deepspeechlog.html' %}
-  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\deepspeechlog.html", line 13, in top-level template code
-    <a href="{{ url_for('user', username=post.author.username) }}">
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 474, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'post' is undefined
-2021-05-30 13:25:49,974 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:33]
-2021-05-30 13:25:51,827 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
-Traceback (most recent call last):
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
-    response = self.full_dispatch_request()
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 36, in index
-    return render_template('index.html', title='Home', form=form, deepspeechlogs=deepspeechlogs.items, next_url=next_url, prev_url=prev_url)        # items attribute from Pagination class from Flask-SQLAlchemy, contains the list of items retrieved for the selected page
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\templating.py", line 128, in _render
-    rv = template.render(context)
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 925, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\base.html", line 1, in top-level template code
-    {% extends "bootstrap/base.html" %}
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 4, in block 'doc'
-    {%- block html %}
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 20, in block 'html'
-    {% block body -%}
-  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_bootstrap\templates\bootstrap\base.html", line 23, in block 'body'
-    {% block content -%}
-  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\index.html", line 19, in block 'content'
-    {% include 'deepspeechlog.html' %}
-  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\deepspeechlog.html", line 10, in top-level template code
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\deepspeechlog.html", line 12, in top-level template code
     <a href="{{ url_for('user', username=post.author.username) }}">
   File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 474, in getattr
     return getattr(obj, attribute)

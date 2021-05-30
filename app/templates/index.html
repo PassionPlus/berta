@@ -1,27 +1,27 @@
 {% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
 <h1>Hi, {{ current_user.username }}!</h1>
-{%if form%}
-<form action="" method="post">
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.deepspeechlog.label }}<br>
-        {{ form.deepspeechlog(cols=32, rows=4) }}<br>
-        {% for error in form.deepspeechlog.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}
-    </p>
-    <p>{{ form.submit() }}</p>
-</form>
+{% if form %}
+{{ wtf.quick_form(form) }}
+<br>
 {% endif %}
 {% for deepspeechlog in deepspeechlogs %}
-    {% include 'deepspeechlog.html' %}
+{% include 'deepspeechlog.html' %}
 {% endfor %}
-{% if prev_url %}
-<a href="{{ prev_url }}">Newer DeeSpeechLogs</a>
-{% endif %}
-{% if next_url %}
-<a href="{{ next_url }}">Older DeepSpeechLogs</a>
-{% endif %}
+<nav aria-label="...">
+    <ul class="pager">
+        <li class="previous{% if not prev_url %} disabled{% endif %}">
+            <a href="{{ prev_url or '#' }}">
+                <span aria-hidden="true">&larr;</span> Newer DeepSpeechLogs
+            </a>
+        </li>
+        <li class="next{% if not next_url %} disabled{% endif %}">
+            <a href="{{ next_url or '#' }}">
+                Older DeepSpeechLogs <span aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 {% endblock %}

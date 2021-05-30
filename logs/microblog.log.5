@@ -1,0 +1,104 @@
+2021-05-29 11:52:52,259 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:14:01,093 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:14:17,710 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:15:10,403 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:34:04,140 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:34:16,743 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:37:43,296 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:39:44,545 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:52:54,098 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 14:52:56,859 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 26, in index
+    return render_template('index.html', title='Home', deepspeechlogs=deepspeechlogs)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\templating.py", line 128, in _render
+    rv = template.render(context)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 925, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\base.html", line 32, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\templates\index.html", line 6, in block 'content'
+    {{ form.hidden_tag() }}
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\jinja2\environment.py", line 474, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'form' is undefined
+2021-05-29 15:09:24,399 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 15:10:50,759 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-29 15:10:53,301 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 27, in index
+    deepspeechlogs = DeepSpeechLog.query.order_by(Post.timestamp.desc()).all()
+NameError: name 'Post' is not defined
+2021-05-29 15:11:04,224 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-30 12:33:58,001 INFO: Berta voice assistant [in C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\__init__.py:31]
+2021-05-30 12:34:33,894 ERROR: Exception on / [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 28, in index
+    deepspeechlogs = DeepSpeechLog.query.order_by(DeepSpeechLog.timestamp.desc()).paginate(
+AttributeError: 'Pagination' object has no attribute 'all'
+2021-05-30 12:34:35,279 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 28, in index
+    deepspeechlogs = DeepSpeechLog.query.order_by(DeepSpeechLog.timestamp.desc()).paginate(
+AttributeError: 'Pagination' object has no attribute 'all'
+2021-05-30 12:34:36,792 ERROR: Exception on /index [GET] [in c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py:1454]
+Traceback (most recent call last):
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 2070, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1515, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1513, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask\app.py", line 1499, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "c:\users\stella\documents\hochschule_\bachelorarbeit\berta\venv\lib\site-packages\flask_login\utils.py", line 272, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Users\Stella\Documents\Hochschule_\Bachelorarbeit\berta\app\routes.py", line 28, in index
+    deepspeechlogs = DeepSpeechLog.query.order_by(DeepSpeechLog.timestamp.desc()).paginate(
+AttributeError: 'Pagination' object has no attribute 'all'

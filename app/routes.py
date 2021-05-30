@@ -16,7 +16,7 @@ def index():
     form = DeepSpeechLogForm()
     
     if form.validate_on_submit():
-        deepspeechlog = DeepSpeechLog(question=form.deepspeechlog.data) #i nserts a new Log record into the database
+        deepspeechlog = DeepSpeechLog(question=form.deepspeechlog.data) # inserts a new Log record into the database
         #
         #place for implement answer
         #
@@ -24,8 +24,16 @@ def index():
         db.session.commit()
         flash('Your deepspeechlog is now live!')
         return redirect(url_for('index'))       # standart practice to response to POST request, for refresh (Post/redirect/Get pattern)
-    deepspeechlogs = DeepSpeechLog.query.order_by(DeepSpeechLog.timestamp.desc()).all()
-    return render_template('index.html', title='Home', form=form, deepspeechlogs=deepspeechlogs)
+    page = request.args.get('page', 1, type=int)
+    deepspeechlogs = DeepSpeechLog.query.order_by(DeepSpeechLog.timestamp.desc()).paginate(                 # gets all DeepSpeechlogs by order paginated
+        page, app.config['POSTS_PER_PAGE'], False)
+        # from Pagination object attribute next_num: page number for the next page
+    next_url = url_for('index', page=deepspeechlogs.next_num) \
+        if deepspeechlogs.has_next else None                    # from Pagination object attribute has_next: true if there is at least one ore page after the current one
+        # from Pagination object attribute prev_num: page number for the previous page
+    prev_url = url_for('index', page=deepspeechlogs.prev_num) \
+        if deepspeechlogs.has_prev else None                    # from Pagination object attribute has_prev: true if there is at least one more page before the current one
+    return render_template('index.html', title='Home', form=form, deepspeechlogs=deepspeechlogs.items, next_url=next_url, prev_url=prev_url)        # items attribute from Pagination class from Flask-SQLAlchemy, contains the list of items retrieved for the selected page 
 
 @app.route('/login', methods=['GET','POST'])
 def login():

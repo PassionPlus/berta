@@ -1,5 +1,6 @@
 # all Flask extentions are needed to be initialized here
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 from logging.handlers import RotatingFileHandler
 import os
 import logging
@@ -11,11 +12,12 @@ from flask_login import LoginManager
 
 app = Flask(__name__)
 app.config.from_object(Config)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy(app)            # database
+migrate = Migrate(app, db)      # for easy upgrading and downgrading database
 login = LoginManager(app)
 login.login_view = 'login'
-bootstrap = Bootstrap(app)
+bootstrap = Bootstrap(app)      # styling
+moment = Moment(app)            # libary for different formating options for date and time 
 
 # if the app is not in debug mode write the messages in a log file 
 # size of logfile 10KB, keeping last 10 log files as backup.

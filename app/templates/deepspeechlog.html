@@ -1,7 +1,7 @@
 <table  class="table table-hover">
     <tr>
-        <td>{{ deepspeechlog.timestamp }} 
-            <br> question: {{ deepspeechlog.question }} 
+        <td>{{ moment(deepspeechlog.timestamp).format('LLLL') }}: 
+            <br> question: {{ deepspeechlog.question }}
             <br> answer: {{ deepspeechlog.answer }}
         </td>
     </tr>

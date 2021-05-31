@@ -47,3 +47,8 @@
     {% block app_content %}{% endblock %}
 </div>
 {% endblock %}
+<!--JavaScript for including moment.js libary, for correct date and time view -->>
+{% block scripts %}
+{{ super() }}
+{{ moment.include_moment() }}
+{% endblock %}

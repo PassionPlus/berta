@@ -1,9 +1,20 @@
 # berta
-Raspberry pi local voice assistant
+Bachelor thesis: Development and evalution of a language assistant system based on open source compoments.
 
-Installing Berta:
+Berta is a Raspberry Pi local voice assistant system based on open
+source components.
 
-Running Berta:
+Installing Berta on Raspberry Pi:
+$ git clone https://github.com/PassionPlus/berta.git
+
+Create virtual environment and install all the package dependencies.
+$ python3 -m venv venv
+$ source venv/bin/activate
+(venv) $ pip install -r requirements.txt
+
+
+Run Berta:
+
 
 Updating database:
 By every change on the application models an updated has to be done, so a new migration needs to be generated:
@@ -14,6 +25,9 @@ Applieing migration to the database:
 Switching database:
 If a  database server such as MySQL wants to be userd. Change the DATABASE_URL to your chosen one.
 The database in the databse server has to be created befor running (venv) $ flask db upgrade
+
+Note:
+By using this in a production environment it is recommended to change the SECRET_KEY in the config.py.
 
 Helpfull Links:
 Learn Python:

@@ -1,19 +1,24 @@
 # berta
-Bachelor thesis: Development and evalution of a language assistant system based on open source compoments.
+Bachelor thesis: Development and evalution of a voice assistant system based on open source compoments.
 
 Berta is a Raspberry Pi local voice assistant system based on open
 source components.
 
+Deployement on Linux or Raspberry Pi Hosting.
+Raspberry Pi with Raspbian, official distribution from the Raspberry Pi Foundation.
+Use a fresh setup SD Card with Raspbian for using Berta.
+
 Installing Berta on Raspberry Pi:
 $ git clone https://github.com/PassionPlus/berta.git
 
-Create virtual environment and install all the package dependencies.
+Create virtual environment in berta file and install all the package dependencies.
 $ python3 -m venv venv
 $ source venv/bin/activate
 (venv) $ pip install -r requirements.txt
 
 
 Run Berta:
+$ flask run
 
 
 Updating database:
@@ -28,6 +33,8 @@ The database in the databse server has to be created befor running (venv) $ flas
 
 Note:
 By using this in a production environment it is recommended to change the SECRET_KEY in the config.py.
+
+It is suggested that the self-signed certificate is replaced with a real one, so that the browser does not warn about the site.
 
 Helpfull Links:
 Learn Python:

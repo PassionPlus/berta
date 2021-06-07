@@ -1,8 +1,10 @@
-# berta
+# Welcome to Berta voce assistant!
 Bachelor thesis: Development and evalution of a voice assistant system based on open source compoments.
 
 Berta is a Raspberry Pi local voice assistant system based on open
 source components.
+
+See the following instructions on how to work with it.
 
 Deployement on Linux or Raspberry Pi Hosting.
 Raspberry Pi with Raspbian, official distribution from the Raspberry Pi Foundation.

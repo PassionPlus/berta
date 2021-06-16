@@ -1,3 +1,4 @@
+# python top-level script that defines the Flask application instance
 from app import app, db
 from app.models import User, DeepSpeechLog
 

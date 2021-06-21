@@ -1,19 +1,47 @@
 #!/bin/bash
 
 # This is the prerequisite script
-# TODO More info
-# TODO 
+# TODO TEMPLATE
+# DONE Verify running as root
+# DONE Verify correct Kernel version
+# DONE Update system
+# DONE Generate RSA Key
+# DONE Supervisor stuff
+# DONE move nginx config to correct folder (/etc/nginx/sites-enabled/berta)
+# DONE Reload nginx service
+# DONE set up python environment
 
-# ensure user is running as root
+# ************************
+# * Step 1: REQUIREMENTS *
+# ************************
+REQ_MAJ=5
+REQ_MIN=10
+
+# * Ensure user is running as root *
+
 if [ "$EUID" -ne 0 ]
 then 
 	echo "ERROR: Script must be run as root. Exiting..."
-	exit
+	exit 1
 fi
 
+# Check Kernel Version
+KERNEL=$(uname -r)
+MAJ=$(awk -F . '{print $1}' <<< $KERNEL)
+MIN=$(awk -F . '{print $2}' <<< $KERNEL)
+
+if [ "$MAJ" -lt "$REQ_MAJ" ] && [ "$MIN" -lt "$REQ_MIN" ]
+then
+    echo "ERROR: Kernel Version to low"
+    echo "You're current Kernel version is: $KERNEL"
+    echo "Please update to a Kernel verion: $REQ_MAJ.$REQ_MIN+"
+    exit 1
+fi
 
 echo "******************************************************************"
+echo "*                                                                *"
 echo "* Initializing system and dependencies for berta voice assistant *"
+echo "*                                                                *"
 echo "******************************************************************"
 echo ""
 sleep 1
@@ -32,6 +60,9 @@ fi
 
 sleep 1
 
+# *************************
+# * Step 2: Update System *
+# *************************
 echo "Updating and installing latest packages...."
 
 # Update and upgrade raspberry
@@ -42,46 +73,81 @@ echo "Installing needed OS dependancies"
 
 # install needed programms and dependancies
 # to fix numpy, libatlas-base-dev is needed
-apt install -y git build-essential python3 python3-dev nginx python3-pyaudio libatlas-base-dev libttspico-utils
+apt install -y git openssl build-essential python3 python3-dev nginx python3-pyaudio libatlas-base-dev libttspico-utils supervisor
 
-# TODO set up nginx, and flask project
-#service nginx start
+echo "DONE"
 
+# ************************************
+# * Step 3: Get further Dependencies *
+# ************************************
 mkdir -p /home/pi/bertaDependencies
-#mkdir -p /home/pi/berta
-
-#chwon www-data /home/pi/berta
-
 cd /home/pi/bertaDependencies
 
-# TODO git stuff
-# clone forked and updated respeaker drivers
-
-git clone https://github.com/HinTak/seeed-voicecard.git #fixed seeed-voicecard driver
-git clone https://github.com/mozilla/DeepSpeech-examples.git #Deepspeech examples; needed?
-# git clone deepspeech?
+echo "Downloading Deepspeech Model"
 curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.tflite
-curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm
+mv deepspeech-*.model /home/pi/berta/app/libs
+
+echo "Downloading Deepspeech scorer"
 curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
-# clone deepspeech stuff
-# clone 
+mv deepspeech-*.scorer /home/pi/berta/app/libs
+
+# set up Respeaker card
+echo "Setting up ReSpeaker daughter board"
+git clone https://github.com/HinTak/seeed-voicecard.git #fixed seeed-voicecard driver
+./seeed-voicecard/ubuntu-prerequisite.sh
+./seeed-voicecard/install.sh
+
+cd /home/pi/berta
+rm -rf /home/pi/bertaDependencies
+
+# *************************************
+# * Step 4: Set up Python environment *
+# *************************************
+
+python3 -m venv venv
+source venv/bin/activate
+pip3 install -r requirements.txt
+deactivate
+
+# **********************************************************
+# * Step 5: Set up Supervisor to restart website if needed *
+# **********************************************************
+
+cp berta.conf /etc/supervisor/conf.d/
+supervisorctl reload
+
+# *****************************************************
+# * Step 6: Set up self signed certificates for NGINX *
+# *****************************************************
+
+echo "Creating self signed certificates"
 
 
-# TODO Set up python environment
-#cd /home/pi/berta
+domain=berta.de
+commonname=$domain
+country=DE
+state=Ba-Wu
+locality=MA
+organization=Berta.de
+organizationalunit=VoiceAssistant
+email=berta@berta.de
+password=dummypassword
 
-# *** OBSOLETE; see requirements.txt
-#pip3 install virtualenv deepspeech flask uwsgi pvporcupine~=1.8.7 pyaudio~=0.2.11 webrtcvad~=2.0.10 halo~=0.0.18 numpy~=1.16.2 scipy~=1.5.4 soundfile
+openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -keyout key.pem -out cert.pem -subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationunit/CN=$commonname/emailAddress=$email"
 
+mkdir certs
+mv key.pem ./certs/
+mv cert.pem ./certs/
 
-#reboot now
+rm /etc/nginx/sites-enabled/default
 
-echo "**********"
-echo "Done with first step, please reboot"
-echo "**********"
+mv berta /etc/sites-enabled/
 
-# Create file to indicate we have finished the first part
-# creating file in /var/tmp as it persists over reboots
-# if user doesn't execute second script for some reason
-# file will be deleted after OS Specific time (default = 30 days)
-touch /var/tmp/firstStep.done
+service nginx reload
+
+echo "**************************************************************"
+echo "*                                                            *"
+echo "* Done with setting up Berta, please reboot and run berta.sh *"
+echo "*                                                            *"
+echo "**********************************************************i***"
+

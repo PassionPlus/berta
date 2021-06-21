@@ -7,7 +7,7 @@ from flask.helpers import url_for
 from flask import render_template, flash, redirect, request
 from app.models import User, DeepSpeechLog
 from app.forms import DeepSpeechLogForm, LoginForm, EditProfileForm
-from app import app, db
+from app import app, db, berta
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -16,10 +16,10 @@ def index():
     form = DeepSpeechLogForm()
     
     if form.validate_on_submit():
-        deepspeechlog = DeepSpeechLog(question=form.deepspeechlog.data) # inserts a new Log record into the database
-        #
-        #place for implement answer
-        #
+        #deepspeechlog = DeepSpeechLog(question=form.deepspeechlog.data) # inserts a new Log record into the database
+        _question = form.deepspeechlog.data
+        _answer = berta.test_phrase(_question)
+        deepspeechlog = DeepSpeechLog(question=_question, answer = _answer)
         db.session.add(deepspeechlog)
         db.session.commit()
         flash('Your deepspeechlog is now live!')
@@ -67,6 +67,10 @@ def user(username):
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user.html', user=user)
 
+@app.route('/plugin')      # route has a dynamic component in it
+@login_required
+def plugin():
+    return render_template('plugin.html', user=None)
 
 # Decorator function, executed right befor the view function.
 @app.before_request

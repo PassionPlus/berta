@@ -1,4 +1,5 @@
 from app import app, db, berta
+# python top-level script that defines the Flask application instance
 from app.models import User, DeepSpeechLog
 from app.berta_deepspeech import main_internal
 import threading

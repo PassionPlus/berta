@@ -85,7 +85,7 @@ cd /home/pi/bertaDependencies
 
 echo "Downloading Deepspeech Model"
 curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.tflite
-mv deepspeech-*.model /home/pi/berta/app/libs
+mv deepspeech-*.tflite /home/pi/berta/app/libs
 
 echo "Downloading Deepspeech scorer"
 curl -LO https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.scorer
@@ -113,7 +113,7 @@ deactivate
 # * Step 5: Set up Supervisor to restart website if needed *
 # **********************************************************
 
-cp berta.conf /etc/supervisor/conf.d/
+cp /home/pi/berta/deployment/supervisor/berta.conf /etc/supervisor/conf.d/
 supervisorctl reload
 
 # *****************************************************
@@ -141,7 +141,7 @@ mv cert.pem ./certs/
 
 rm /etc/nginx/sites-enabled/default
 
-mv berta /etc/sites-enabled/
+mv /home/pi/berta/deployment/nginx/berta /etc/sites-enabled/
 
 service nginx reload
 

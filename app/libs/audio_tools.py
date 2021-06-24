@@ -6,7 +6,7 @@ import numpy as np
 import pyaudio
 import wave
 import webrtcvad
-from halo import Halo
+#from halo import Halo
 from scipy import signal
 
 class Audio(object):

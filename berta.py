@@ -52,7 +52,7 @@ if __name__ == "__main__":
     #    except KeyboardInterrupt:
     #        print("exiting")
     #        break
-    main_internal("bumblebee", db, DeepSpeechLog)
+    main_internal("bumblebee,computer", db, DeepSpeechLog)
     # multiple keywords can be given through comma seprated string
     # !!! MUST BE STRING, not list, etc
     #main_internal("bumblebee,hey berta", db, DeepSpeechLog)

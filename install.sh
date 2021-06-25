@@ -159,6 +159,13 @@ mv /home/pi/berta/deployment/nginx/berta /etc/sites-enabled/
 
 service nginx reload
 
+# *****************************************
+# * Step 7: Set up default berta database *
+# *****************************************
+
+/home/pi/berta/venv/bin/python3 /home/pi/berta/berta_db_init.py
+
+
 echo "**************************************************************"
 echo "*                                                            *"
 echo "* Done with setting up Berta, please reboot and run berta.sh *"

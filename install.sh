@@ -98,7 +98,8 @@ git clone https://github.com/HinTak/seeed-voicecard.git #fixed seeed-voicecard d
 ./seeed-voicecard/install.sh
 
 cd /home/pi/berta
-rm -rf /home/pi/bertaDependencies
+# Don't delete dependancies, just in case
+#rm -rf /home/pi/bertaDependencies
 
 # *************************************
 # * Step 4: Set up Python environment *
@@ -112,6 +113,13 @@ deactivate
 # **********************************************************
 # * Step 5: Set up Supervisor to restart website if needed *
 # **********************************************************
+
+# If supervisor dir does not exists, create it
+SUPERVISOR="/ect/supervisor/conf.d"
+if [ ! -d "$SUPERVISOR" ]
+then
+	mkdir $SUPERVISOR
+fi
 
 cp /home/pi/berta/deployment/supervisor/berta.conf /etc/supervisor/conf.d/
 supervisorctl reload
@@ -139,7 +147,13 @@ mkdir certs
 mv key.pem ./certs/
 mv cert.pem ./certs/
 
-rm /etc/nginx/sites-enabled/default
+NGINX="/etc/nginx/sites-enabled"
+if [ ! -d "$NGINX" ]
+then
+	mkdir $NGINX
+else
+	rm /etc/nginx/sites-enabled/default
+fi
 
 mv /home/pi/berta/deployment/nginx/berta /etc/sites-enabled/
 

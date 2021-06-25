@@ -48,13 +48,10 @@ logging.basicConfig(level=logging.INFO)
 
 class BertaDeepSpeech(Thread):
     """
-    Demo class for wake word detection (aka Porcupine) library. It creates an input audio stream from a microphone,
+    Class for wake word detection (aka Porcupine) library. It creates an input audio stream from a microphone,
     monitors it, and upon detecting the specified wake word(s) prints the detection time and index of wake word on
-    console. It optionally saves the recorded audio into a file for further review.
+    console. 
     """
-
-#    VADAudio = audio_tools.VADAudio
-
     def __init__(
             self,
             library_path,
@@ -88,11 +85,6 @@ class BertaDeepSpeech(Thread):
         self.db_model = None
         self.pt = PicoTTS()
         self.pa = pyaudio.PyAudio()
-    #main_internal("bumblebee", db, DeepSpeechLog)
-
-        # NEW: create a log file for spoken text
-        #self._logfile = open("output.log", "w+")
-        #self._logfile.write("Starting recording [" + str(datetime.now()) + "]\n")
 
         self._output_path = output_path
         if self._output_path is not None:
@@ -150,7 +142,7 @@ class BertaDeepSpeech(Thread):
                 print("Recognized: %s" % text)
 
 
-                log = (text, self.do_the_thing(text))
+                log = (text, self.analyze(text))
                 return (1, log)
 
                 if 'stop recording' in text:
@@ -168,7 +160,8 @@ class BertaDeepSpeech(Thread):
                 return action[0]()
         return default()
 
-    def do_the_thing(self, phrase):
+    def analyze(self, phrase):
+        """Method that analyzes the phrase given, speaks and returns the answer"""
         # find the correct action to take
         action = self.find_action(phrase)
         # perform the action and get the answer
@@ -179,6 +172,7 @@ class BertaDeepSpeech(Thread):
         return answer
 
     def test_phrase(self, phrase):
+        """Method used in web application to test apis maually"""
         # find the correct action to take
         action = self.find_action(phrase)
         # perform the action and get the answer
@@ -187,7 +181,8 @@ class BertaDeepSpeech(Thread):
         return answer
 
     def speek(self, answer):
-        #self.pa = pyaudio.PyAudio()
+        """Method that generates the audio data and plays it on the microphone"""
+        self.pa = pyaudio.PyAudio()
         # 1kb of data at a time
         chunk = 1024
         # create the picotts wav
@@ -202,12 +197,6 @@ class BertaDeepSpeech(Thread):
         data = wav.readframes(chunk)
         pixels.speak()
         print("speaking here")
-        #print(self.pa)
-        #print(stream)
-        # keep writing wav data to stream while there is still wav data left
-        
-        # TEST
-        #self.test(wav)
 
 
         while data:
@@ -218,11 +207,8 @@ class BertaDeepSpeech(Thread):
         pixels.off()
         stream.stop_stream()
         stream.close()
-        
+        self.pa.terminate()
 
-    def test(self, wav):
-        os.system(f"XDG_RUNTIME_DIR=/run/user/1000 paplay {wav}")
-    
 
     def run(self):
         """
@@ -303,9 +289,6 @@ class BertaDeepSpeech(Thread):
                 recorded_audio = np.concatenate(self._recorded_frames, axis=0).astype(np.int16)
                 soundfile.write(self._output_path, recorded_audio, samplerate=porcupine.sample_rate, subtype='PCM_16')
 
-            # NEW close file to correctly terminate
-            #self._logfile.write("Done recording [" + str(datetime.now()) + "]\n")
-            #self._logfile.close()
             pixels.off()
 
     _AUDIO_DEVICE_INFO_KEYS = ['index', 'name', 'defaultSampleRate', 'maxInputChannels']
@@ -323,6 +306,7 @@ class BertaDeepSpeech(Thread):
         pa.terminate()
 
 def berta_factory(keywords):
+    """Berta object creator with sane defaults for use outside the application"""
     library_path = LIBRARY_PATH
     keyword_paths = None
     kws = [x.strip() for x in keywords.split(',')]
@@ -345,58 +329,22 @@ def berta_factory(keywords):
         sensitivities=sensitivities,
         output_path=output_path,
         input_device_index=None)
-
-    
     
 def main_internal(keywords, db, model):
     berta = berta_factory(keywords)
+    print("MAIN")
     while True:
         try:
             output = berta.run()
-            if(db and berta.db_model):
-                log = model(question=output[0], answer=output[1])
-                db.session.add(log)
-                db.session.commit()
-                
-        except KeyboardInterrupt:
-            print("exiting")
-            return 1
-
-
-def main_internal1(keywords, db, model):
-    """New main method for berta"""
-
-    library_path = LIBRARY_PATH
-
-    keyword_paths = None
-    kws = [x.strip() for x in keywords.split(',')]
-    if all(x in KEYWORDS for x in kws):
-        keyword_paths = [KEYWORD_PATHS[x] for x in kws]
-    else:
-        raise ValueError(
-            'selected keywords are not available by default. available keywords are: %s' % ', '.join(KEYWORDS))
-
-    model_path = MODEL_PATH
-
-    sensitivities=0.5
-    if isinstance(sensitivities, float):
-        sensitivities = [sensitivities] * len(keyword_paths)
-
-    output_path = None
-    input_device_index = None
-    while True:
-        try:
-            output = BertaDeepSpeech(
-                library_path=library_path,
-                model_path=model_path,
-                keyword_paths=keyword_paths,
-                sensitivities=sensitivities,
-                output_path=output_path,
-                input_device_index=input_device_index).run()
-            if(db and model):
-                log = model(question=output[0], answer=output[1])
-                db.session.add(log)
-                db.session.commit()
+            print(output)
+            print(db)
+            print(model)
+            #if(db and berta.db_model):
+            log = model(question=output[0], answer=output[1])
+            print(output[0])
+            print(output[1])
+            db.session.add(log)
+            db.session.commit()
                 
         except KeyboardInterrupt:
             print("exiting")
@@ -404,4 +352,4 @@ def main_internal1(keywords, db, model):
 
 if __name__ == '__main__':
     #main()
-    main_internal('bumblebee')
+    main_internal('bumblebee,computer')

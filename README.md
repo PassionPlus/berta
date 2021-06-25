@@ -15,37 +15,22 @@ Installing Berta on Raspberry Pi by cloning the application directly from its gi
 $ git clone https://github.com/PassionPlus/berta.git
 ```
 
-Create virtual environment in berta file and install all the package dependencies.
+after cloning berta, please run the install script as root (sudo will do)
 ```
-$ python3 -m venv venv
-$ source venv/bin/activate
-(venv) $ pip install -r requirements.txt
+$ ./install.sh
 ```
 
-Run Berta:
-```
-$ flask run
-```
+## Note:
+all dependencies are located in a folder during installation named bertaDependancies (installed to the pi users home directory). If for any reason the installation fails, or berta cannot be started, in most cases the the daughter board drivers did not install correctly. To troubleshoot, please try the following steps:
 
-Updating database:
-By every change on the application models an updated has to be done, so a new migration needs to be generated:
-```
-(venv) $ flask db migrate -m "your message"
-```
-Applieing migration to the database:
-```
-(venv) $ flask db upgrade
-```
-Switching database:
-If a  database server such as MySQL wants to be userd. Change the DATABASE_URL in the config.py to your chosen one.
-The database in the databse server has to be created befor running (venv) $ flask db upgrade
+- Restart the raspberry and try starting berta again
+- if it still fails, rerun the following scripts found inside the bertaDependancies folder:
+	- cd path/to/bertaDependancies
+	- ./seeed-voicecard/ubuntu-prerequisite.sh
+	- ./seeed-voicecard/install.sh
 
-Note:
-By using this in a production environment it is recommended to change the SECRET_KEY in the config.py.
+after another reboot, berta should be up and running
 
-
-The self-signed certificate was given in this repo for demonstration purposes.
-It is suggested that the self-signed certificate is replaced with a real one, so that the browser does not warn about the site.
 
 Helpfull Links:
 Learn Python:

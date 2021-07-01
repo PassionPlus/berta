@@ -13,8 +13,8 @@ server {
     server_name _;
 
     # location of the self-signed SSL certificate
-    ssl_certificate /home/pi/test/berta/certs/cert.pem;
-    ssl_certificate_key /home/pi/test/berta/certs/key.pem;
+    ssl_certificate /home/pi/berta/certs/cert.pem;
+    ssl_certificate_key /home/pi/berta/certs/key.pem;
 
     # write access and error logs to /var/log
     access_log /var/log/berta_access.log;
@@ -31,7 +31,7 @@ server {
 
     location /static {
         # handle static files directly, without forwarding to the application
-        alias /home/pi/test/berta//app/static;
+        alias /home/pi/berta/app/static;
         expires 30d;
     }
 }

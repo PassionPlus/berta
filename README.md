@@ -1,5 +1,5 @@
 # Welcome to Berta voice assistant!
-## Bachelor thesis: Development and evalution of a voice assistant system based on open source compoments.
+## Bachelor thesis: Development and evalution of a voice assistant system based on open source compoments for Raspberry Pi.
 
 Berta is a Raspberry Pi local voice assistant system based on open
 source components.
@@ -18,6 +18,13 @@ $ git clone https://github.com/PassionPlus/berta.git
 after cloning berta, please run the install script as root (sudo will do)
 ```
 $ ./install.sh
+```
+
+## Webinterface
+The default user name and password that are created in the database are:
+```
+admin
+123
 ```
 
 ## Note:

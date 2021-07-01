@@ -2,6 +2,7 @@
 #from . import pluginMount
 from .pluginmount import PluginMount
 import requests
+import datetime 
 
 #PluginMount = pluginMount.PluginMount
 
@@ -46,17 +47,18 @@ class SimplePlugin(ActionProvider):
 
 
 class iDatePlugin():
-    import datetime 
 
-    today = datetime.date.today()
-    now = datetime.datetime.now()
+    #today = datetime.date.today()
+    #now = datetime.datetime.now()
 
     # Textual month, day and year
     def getDate(self):
-        return self.today.strftime("%B %d, %Y")
+        #return self.today.strftime("%B %d, %Y")
+        return datetime.date.today().strftime("%B %d, %Y")
 
     def getTime(self):
-        return self.now.strftime("%H:%M")
+        #return self.now.strftime("%H:%M")
+        return datetime.datetime.now().strftime("%H:%M")
 
     def perform(self):
         pass

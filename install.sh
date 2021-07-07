@@ -1,16 +1,5 @@
 #!/bin/bash
 
-# This is the prerequisite script
-# TODO TEMPLATE
-# DONE Verify running as root
-# DONE Verify correct Kernel version
-# DONE Update system
-# DONE Generate RSA Key
-# DONE Supervisor stuff
-# DONE move nginx config to correct folder (/etc/nginx/sites-enabled/berta)
-# DONE Reload nginx service
-# DONE set up python environment
-
 # ************************
 # * Step 1: REQUIREMENTS *
 # ************************
@@ -163,6 +152,9 @@ service nginx reload
 # * Step 7: Set up default berta database *
 # *****************************************
 
+# Create db
+/home/pi/berta/venv/bin/flask db upgrade 
+# Update db
 /home/pi/berta/venv/bin/python3 /home/pi/berta/berta_db_init.py
 
 
